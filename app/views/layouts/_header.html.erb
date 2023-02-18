@@ -9,7 +9,7 @@
         <ul class="navbar-nav ml-auto">
         <% if customer_signed_in? %>
           <li>
-            <%= link_to "マイページ", user_path(current_user),class: 'nav-link text-light' do %>
+            <%= link_to "マイページ", public_customer_path(current_user),class: 'nav-link text-light' do %>
             <% end %>
           </li>
           <li>
