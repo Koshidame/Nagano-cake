@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :customers
-  devise_for :admins
+  devise_for :customers,skip: [:passwords], controllers: {
+  registrations: "publics/registrations",
+  sessions: 'publics/sessions'
+}
+
+  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+  sessions: "admins/sessions"
+}
   
   namespace :public do
     root to: 'homes#top'
