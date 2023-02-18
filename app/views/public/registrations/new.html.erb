@@ -4,7 +4,7 @@
   <%= render "publics/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email, class: 'btn btn-success' %><br />
+    <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
@@ -27,4 +27,4 @@
 <% end %>
 
 <p>すでに登録お済みの方</p>
-<p><%= link_to "こちら", new_customer_session_path %> からログインしてください。</p>
+<p><%= link_to "こちら", new_customer_registration_path %> からログインしてください。</p>
