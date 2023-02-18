@@ -2,10 +2,10 @@ Rails.application.routes.draw do
   devise_for :customers
   devise_for :admins
   
- # namespace :public do
+  namespace :public do
     root to: 'homes#top'
     get '/about' => 'homes#about'
-  # end
+  end
   
   namespace :public do
     resources :items, only: [:index, :show]
