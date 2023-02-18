@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   devise_for :customers
   devise_for :admins
   namespace :admin do
+    get 'order_details/update'
+  end
+  namespace :admin do
     get 'makings/update'
   end
 
