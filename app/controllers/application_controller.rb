@@ -4,12 +4,11 @@ class ApplicationController < ActionController::Base
   private
 
   def after_sign_in_path_for(resource)
-    case resource
-   when Admin
-     admin_path
-   when Public
-     public_customers_path
-   end
+    if resource.is_a?(Admin)
+      admin_orders_path
+    else
+      public_path
+    end
   end
 
   def after_sign_out_path_for(resource)
