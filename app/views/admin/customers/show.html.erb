@@ -4,13 +4,15 @@
   <dt class="col-2">会員ID</dt>
   <dd class="col-10"><%= @customers.id%></dd>
   <dt class="col-2">氏名</dt>
-   <dd class="col-10"><%= @customers.first_name%><%= @customers.last_name %></dd>
+   <dd class="col-10"><%= @customers.first_name%>&emsp;<%= @customers.last_name %></dd>
   <dt class="col-2">フリガナ</dt>
-   <dd class="col-10"><%= @customers.first_name_kana %><%= @customers.last_name_kana %></dd>
+   <dd class="col-10"><%= @customers.first_name_kana %>&emsp;<%= @customers.last_name_kana %></dd>
   <dt class="col-2">郵便番号</dt>
    <dd class="col-10"><%= @customers.postal_code %></dd>
   <dt class="col-2">住所</dt>
    <dd class="col-10"><%= @customers.address %></dd>
+   <dt class="col-2">電話番号</dt>
+   <dd class="col-10"><%= @customers.telephone_number %></dd>
   <dt class="col-2">メールアドレス</dt>
    <dd class="col-10"><%= @customers.email %></dd>
   <dt class="col-2">会員ステータス</dt>
