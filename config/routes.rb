@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   sessions: "admin/sessions"
 }
 
+  root to: 'public/homes#top'
+
   namespace :public do
     get '/' => 'homes#top'
     get '/about' => 'homes#about'
