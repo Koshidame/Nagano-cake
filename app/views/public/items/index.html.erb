@@ -5,13 +5,9 @@
     </div>
     <div class="col-md-9" >
       <h1 class="product-title">
-        <!--% if params[:genre_id] %>-->
-          <!--%= @genre.name %>-->
-        <!--% else %>-->
           商品一覧
-        <!--% end %>-->
       </h1>
-      <!--<strong> 全%= @products.count %>件 </strong>-->
+      <strong> 全%= @products.count %>件 </strong>
       <div class="products-list">
         <!--% @products.each do |product| %>-->
           <!--% if product.genre.is_active == true %>-->
@@ -29,4 +25,3 @@
     </div>
   </div>
 </div>
-<p>Find me in app/views/public/items/index.html.erb</p>
