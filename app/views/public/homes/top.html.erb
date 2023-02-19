@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <!--%= render 'admin/genres/genre_sidebar', genres: @genres  %>-->
+
     </div>
 
 
@@ -22,14 +22,7 @@
         <!--% @random.each do |product| %>-->
           <div class="recommend-product">
             <!--%= link_to product_path(product) do %>-->
-              <!--%= attachment_image_tag product, :image, size:'180x130', fallback: 'no_image.jpg', size:'180x130' %><br>-->
-            <!--% end %>-->
-            <p> %= product.name %</p>
-            <p>¥ %= (product.price*1.1).floor.to_s(:delimited)% (税込)</p>
-          </div>
-        <!--% end %>-->
-      </div>
-      <div class="recommend-more"><%= link_to "全ての商品を見る>", public_items_path %></div>
+
     </div>
   </div>
 </div>
