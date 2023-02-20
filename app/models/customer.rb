@@ -14,4 +14,8 @@ class Customer < ApplicationRecord
   validates :email, presence: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i,message: "は正しいフォーマットで入力してください" }, uniqueness: { message: "このアドレスは使用できません"}
   validates :password, presence: true, length: { minimum: 6 }
   
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
+  
 end

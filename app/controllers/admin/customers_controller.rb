@@ -4,7 +4,7 @@ class Admin::CustomersController < ApplicationController
   end
   
   def show
-    @customers = Customer.find(params[:id])
+    @customer = current_customer
   end
   
   def create
@@ -14,6 +14,17 @@ class Admin::CustomersController < ApplicationController
   end
   
   def update
+  end
+  
+  def unsubscribe
+  end
+  
+  def withdrawal
+    @customer = Customer.find(params[:id])
+    @customer.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "退会処理を実行いたしました"
+    redirect_to root_path
   end
   
   private
