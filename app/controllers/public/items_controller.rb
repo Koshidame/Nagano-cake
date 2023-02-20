@@ -1,24 +1,12 @@
 class Public::ItemsController < ApplicationController
   
   def index
-    @genres = Genre.where(is_active: true)
-    if params[:genre_id]
-		  @genre = Genre.find(params[:genre_id])
-		  @products = @genre.products.where(is_active: true).page(params[:page]).reverse_order
-    else
-      @products = Product.where(is_active: true).page(params[:page]).reverse_order
-    end
+    @items = Item.all
+    
   end
 
   def show
-    @product = Product.find(params[:id])
-    @genres = Genre.where(is_active: true)
-    @cart_product = CartProduct.new
+    @item = Item.find(params[:id])
   end
 
-  private
-  	
-	def params_product
-		parmas.require(:product).permit(:image ,:name )
-	end
 end
