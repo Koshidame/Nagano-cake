@@ -16,5 +16,12 @@
   <dt class="col-2">メールアドレス</dt>
    <dd class="col-10"><%= @customers.email %></dd>
   <dt class="col-2">会員ステータス</dt>
-   <dd class="col-10"><%= @customers.is_deleted %></dd>
-</dl>
+      <% if @customers.is_deleted == false %>
+      <dd class="col-10 text-success">有効</dd>
+      <% else %>
+      <dd class="col-10 text-secondary">退会</dd>
+      <% end %>
+ </dl>
+ <div class="row">
+  <%= link_to "編集する", edit_admin_customer_path(@customers),class: 'btn btn-success' %>
+ </div>

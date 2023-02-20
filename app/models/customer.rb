@@ -13,7 +13,7 @@ class Customer < ApplicationRecord
   validates :address,presence: true
   validates :email, presence: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i,message: "は正しいフォーマットで入力してください" }, uniqueness: { message: "このアドレスは使用できません"}
   validates :password, presence: true, length: { minimum: 6 }, on: :update, allow_blank: true
-  
+
   def active_for_authentication?
     super && (is_deleted == false)
   end
@@ -30,5 +30,6 @@ class Customer < ApplicationRecord
     clean_up_passwords
     result
   end
+
   
 end
