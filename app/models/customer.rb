@@ -13,6 +13,23 @@ class Customer < ApplicationRecord
   validates :address,presence: true
   validates :email, presence: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i,message: "は正しいフォーマットで入力してください" }, uniqueness: { message: "このアドレスは使用できません"}
   validates :password, presence: true, length: { minimum: 6 }, on: :update, allow_blank: true
+
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
   
+  def update_without_current_password(params, *options)
+    params.delete(:current_password)
+
+    if params[:password].blank? && params[:password_confirmation].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation)
+    end
+
+    result = update_attributes(params, *options)
+    clean_up_passwords
+    result
+  end
+
   
 end

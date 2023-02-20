@@ -1,25 +1,20 @@
-<div class="container">
+<div class="container px-5 px-sm-0">
   <div class="row">
-    <div class="col-md-3">
-      <!-- ジャンル検索部分テンプレート-->
-    </div>
-    <div class="col-md-9" >
-     <h1><strong>商品一覧</strong></h1>
-      <table class ="table">
-      <tbody>
-      <tr>
-        <th>#商品画像</th> <!--%= image_tag @items_image.get_prifile_image(50,50) %>-->
-      </tr>
-      <tr>
-        <th>商品名</th>
-        <th><%= @items.name %></th>
-      </tr>
-      <tr>
-        <th>¥0,000</th> <!--%= @items.price %>-->
-      </tr>
-      </tbody>     
+     <div class="col-md-8 offset-md-1">
+     <h2>商品一覧</h2>
+      
+      <% @items.each do |item| %>
+      <div>
+      <%= image_tag item.image, size:"50x50" %>
+      </div>
+      <div>
+        <%= item.name %>
+      </div>
+      <div>
+       ¥<%= item.price %>
+      </div>
+      <% end %>
       </table>
-    </div>  
     </div>
   </div>
 </div>
