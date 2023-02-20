@@ -14,6 +14,7 @@ class Admin::ItemsController < ApplicationController
     if @item.save
       redirect_to admin_item_path(@item)
     else
+      @genres =Genre.all
       render :new
     end
   end
@@ -25,6 +26,7 @@ class Admin::ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
+    @genres =Genre.all
   end
 
   def update
