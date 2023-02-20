@@ -12,6 +12,7 @@ class Customer < ApplicationRecord
   validates :postal_code,presence: true
   validates :address,presence: true
   validates :email, presence: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i,message: "は正しいフォーマットで入力してください" }, uniqueness: { message: "このアドレスは使用できません"}
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, on: :update, allow_blank: true
+  
   
 end
