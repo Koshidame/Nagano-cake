@@ -25,6 +25,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
+　　@order = current_customer.orders.new(order_params)
+　　@order.save
   end
 
   def index
@@ -34,8 +36,7 @@ class Public::OrdersController < ApplicationController
   end
 
   private
-
-  def order_params
-    params.require(:order).permit(:payment_method, :postal_code, :address, :name)
-  end
+    def order_params
+       params.require(:order).permit(:customer_id, :postal_code,:ddressa,:shipping_cost,:status,:total_payment,:payment_method)
+    end
 end
