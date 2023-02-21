@@ -30,10 +30,15 @@ class Admin::ItemsController < ApplicationController
     @genres =Genre.all
   end
 
+  
   def update
-    @item = Item.find(params[:id])
+     @item = Item.find(params[:id])
+    if@item.update(item_params)
+      redirect_to admin_item_path(@item.id)
+    else
+      redirect_to admin_genres_path
+    end
   end
-
   private
 
   def item_params
