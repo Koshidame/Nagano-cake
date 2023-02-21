@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     get '/orders/complete' => 'orders#complete'
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
     resources :checkouts, only: [:create]
+    resources :webhooks, only: [:create]
   end
 
   namespace :admin do
