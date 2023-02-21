@@ -7,7 +7,7 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     if params[:order][:select_address] == "0"
       @order.postal_code = current_customer.postal_code
-        @order.address = current_customer.address
+      @order.address = current_customer.address
       @order.name = current_customer.first_name + current_customer.last_name
     elsif params[:order][:select_address] == "1"
       @address = Address.find(params[:order][:address_id])
@@ -18,7 +18,7 @@ class Public::OrdersController < ApplicationController
     else
       redirect_to :back
     end
-    binding.pry #追記する
+    # binding.pry #追記する
   end
 
   def complete
