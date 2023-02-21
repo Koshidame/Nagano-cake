@@ -2,6 +2,55 @@
   <div class='row'>
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
       <h2>注文情報確認</h2>
+      <table class="table cart-table">
+        <thead>
+          <tr>
+            <th class="active col-xs-4">商品名</th>
+            <th class="active col-xs-2">単価（税込）</th>
+            <th class="active col-xs-2">数量</th>
+            <th class="active col-xs-2">小計</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @cart_items.each do |cart_item| %>
+          <tr>
+            <td>
+              <%= image_tag cart_item.item.get_image(50, 50) %>
+              <%= cart_item.item.name %>
+            </td>
+            <td>
+              <%= (cart_item.item.price*1.1 ).floor.to_s(:delimited) %>
+            </td>
+            <td>
+              <%= cart_item.amount %>
+            </td>
+            <td>¥<%= cart_item.sub_total.to_s(:delimited) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <table class="table cart-table">
+        <thead>
+          <tr>
+            <th class="active col-xs-4">送料</th>
+            <th class="active col-xs-2">商品合計</th>
+            <th class="active col-xs-2">請求金額</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <%= @order.shipping_cost %>
+            </td>
+            <td>
+              <%= @total.round.to_s(:delimited) %>
+            </td>
+            <td>
+              <%= @total_with_tax.round.to_s(:delimited)%>
+            </td>
+          </tr>
+        </tbody>
+      </table>
       <div class="form-group">
         <h5>支払い方法</h5>
         <%= @order.payment_method_i18n %>
