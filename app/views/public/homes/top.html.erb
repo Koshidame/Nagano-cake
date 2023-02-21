@@ -1,42 +1,52 @@
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-md-12">
+<div class="container">
+  <div class="row ">
+    <div class="col-3">
+      <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th class="col">ジャンル検索</th>
+    </tr>
+  </thead>
+  <% @genres.each do |genre| %>
+  <tbody>
+    <tr>
+      <td><%= genre.name %></td>
+       </tr>
+       </tbody>
+       <% end %>
+       </table>
+    </div>
+    <div class="col-9 justify-content-center">
       
-      <div style="text-align:center;">
-        <img src="/assets/imag_topic06_01.jpg" width="400" height="260">
-        </div>
-        
-        <h5 class="mx-auto text-center"><br>
-          ようこそ、NaganoCakeへ！<br>
+      <div class="card" style="max-width: 650px;">
+  <img class="card-img" src="/assets/img_topic06_01.jpg" alt="">
+  <div class="card-img-overlay">
+    <p class="text-white text-center "> ようこそ、NaganoCakeへ！<br>
           このサイトは、ケーキ販売のECサイトになります。<br>
           会員でない方も商品の閲覧はできますが、<br>
-          購入には会員登録が必要になります。<br>
-        </p>
-      </div>
-      
-      <div class="recommend-title">
-        <h3>新着商品</h3>
-      </div>
-      
-      <div class="col-sm-3 ">
-      <table class="table table-striped">
-        
-        <% @items.each do |item| %>
-        
-        <div>
-        <%= link_to public_item_path(item) do %> 
-        <%= image_tag item.image, size:"50x50" %><br>
-        <% end %>
-        </div>
-        <div><%= item.name %></div>
-        <div> ¥<%= item.price %></div>
-        </div>
-        <% end %>
-       </table> 
-       
-      </div>
-      </div>
-      <div class="float-end"><%= link_to "全ての商品を見る>", public_items_path %></div>
-    </div>
+          購入には会員登録が必要になります。</p>
   </div>
 </div>
+</div>
+</div>
+        <div class="row">
+          <div class="col-3"></div>
+          <div class="col-9">
+            <h3>新着商品</h3>
+            <div class="row">
+              
+               <% @items.reverse_each do |c| %>
+               <div class="col-3">
+               <div><%= image_tag c.image, size:"150x150" %></div>
+               <div><%= link_to public_item_path(c.id) do %>
+                     <%= c.name %><% end %></div>
+               <div>￥<%= (c.price*1.1).floor.to_s(:delimited) %></div>
+               </div>
+               <% end %>
+               <div class="col-9"></div>
+               <div class="col-3 float-end mt-5"><%= link_to "全ての商品を見る>", public_items_path %></div>
+               </div>
+            </div>
+          </div>
+        </div>
+      </div>
