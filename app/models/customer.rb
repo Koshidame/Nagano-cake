@@ -5,7 +5,7 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :orders, dependent: :destroy
   has_many :addresses, dependent: :destroy
-  
+
   validates :last_name,presence: true
   validates :first_name,presence: true
   validates :first_name_kana, :last_name_kana, presence: true,format: { with: /\A([ァ-ン]|ー)+\z/, message: "はカタカナで入力してください" }
@@ -18,7 +18,7 @@ class Customer < ApplicationRecord
   def active_for_authentication?
     super && (is_deleted == false)
   end
-  
+
   def update_without_current_password(params, *options)
     params.delete(:current_password)
 
@@ -32,5 +32,22 @@ class Customer < ApplicationRecord
     result
   end
 
-  
+  def line_items_checkout
+    cart_items.map do |cart_item|
+      {
+        quantity: cart_item.quantity,
+        price_data: {
+          currency: 'jpy',
+          unit_amount: cart_item.product.price,
+          product_data: {
+            name: cart_item.product.name,
+            metadata: {
+              product_id: cart_item.product_id
+            }
+          }
+        }
+      }
+    end
+  end
+
 end
