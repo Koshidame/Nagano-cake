@@ -9,10 +9,19 @@ class Public::CartItemsController < ApplicationController
   def update
   end
 
-  def destroy
+  def destroy_all
+    @cart_items = current_customer.cart_items
+    if @cart_items.destroy_all
+      redirect_to public_cart_items_path
+    else
+      render :index
+    end
   end
 
   def destroy
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.destroy
+    redirect_to public_cart_items_path
   end
 
   def create
