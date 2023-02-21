@@ -21,24 +21,24 @@
         </tr>
       </thead>
       <tbody>
-      <% @cart_items.each do |cart_items| %>
+      <% @cart_items.each do |cart_item| %>
         <tr>
           <td>
-            <%= image_tag @cart_items.get_image(50, 50) %>
-            <%= @cart_items.name %>
+            <%= image_tag cart_item.item.get_image(50, 50) %>
+            <%= cart_item.item.name %>
           </td>
           <td>
-            <%= (@cart_items.price*1.1 ).floor.to_s(:delimited) %>
+            <%= (cart_item.item.price*1.1 ).floor.to_s(:delimited) %>
           </td>
           <td>
-            <%= form_with model: cart_items, url: public_cart_items_path(cart_items), local: true do |f| %>
-              <%= f.hidden_field :id, :value => cart_items.id %>
+            <%= form_with model: cart_item, url: public_cart_items_path(cart_item), local: true do |f| %>
+              <%= f.hidden_field :id, :value => cart_item.id %>
               <%= f.text_field :amount, :size => "5" %>　<%= f.submit "変更" %>
             <% end %>
           </td>
-          <td>¥<%= cart_items.sub_total.to_s(:delimited) %></td>
+          <td>¥<%= cart_item.sub_total.to_s(:delimited) %></td>
           <td>
-            <%= link_to public_cart_items_path(cart_items), method: :delete do %>
+            <%= link_to public_cart_items_path(cart_item), method: :delete do %>
               <button class="btn btn-danger">削除</button>
             <% end %>
           </td>
