@@ -1,7 +1,8 @@
-<div class='container px-5 px-sm-0'>
+<div class='container'>
   <div class='row'>
-    <div class='col-md-3'>
-      <h2>商品一覧</h2>
+      <h2 class="col-11">商品一覧</h2>
+      <div class="float-end"><button type="button" class=" btn btn-warning rounded-circle p-0" style="width:2rem;height:2rem;"><%= link_to "＋",new_admin_item_path, class:"font-weight: 700" %></button></div>
+      
       <table class='table table-hover table-inverse'>
         <thead>
           <tr>
@@ -19,17 +20,17 @@
               <td><%= link_to item.name, admin_item_path(item), class: "item_#{item.id}" %></td>
               <td><%= item.price %></td>
               <td><%= item.genre.name %></td>
-              <td>
                 <%if item.sales_status == true %>
-                  販売中
+                  <td class="text-success">販売中</td>
                 <% elsif %>
-                  販売停止中
+                  <td class="text-secondary">販売停止中</td>
                 <% end %>
               </td>
             </tr>
           <% end %>
-        </tbody>
+           </tbody>
       </table>
-    </div>
+      </div>
+      <div class="d-flex justify-content-center"><%= paginate @items %></div>
   </div>
 </div>
