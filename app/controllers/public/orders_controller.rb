@@ -45,9 +45,13 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
+    @orders = Order.all
+    @cart_items = current_customer.cart_items.all
   end
 
   def show
+    @order = Order.find(params[:id])
+    @total = (@order.total_payment - @order.shipping_cost).round.to_s(:delimited)
   end
 
   private
