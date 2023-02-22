@@ -3,16 +3,20 @@
     <h2 class="col-11">商品一覧</h2>
      
       <div class="row">
-      <% @items.reverse_each do |item| %>
-      <div class="cal-3">
-          
+
+      <div class="cal-4">
+        
+      <div class="col d-flex align-items-center">
+      
+           <% @items.reverse_each do |item| %>    
       <div><%= link_to public_item_path(item) do %> 
-           <%= image_tag item.image, size:"50x50" %>
+           <%= image_tag item.image, size:"200x130" %>
            <% end %></div>
       <div><%= item.name %></div>
        <div>￥<%= (item.price*1.1).floor.to_s(:delimited) %>
       <% end %>
       </div>
+      
       
       </div>
       </div>
