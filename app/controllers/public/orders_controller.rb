@@ -5,10 +5,11 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @order = Order.new(order_params)
-    @cart_items = current_customer.cart_items.all
     @order.shipping_cost = 800
+    @order.customer_id = current_customer.id
+    @cart_items = current_customer.cart_items.all
     @total = @cart_items.inject(0) { |sum, item| sum + item.sub_total }
-    @total_with_tax = @order.shipping_cost + @total
+    @order.total_payment = @order.shipping_cost + @total
     if params[:order][:select_address] == "0"
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
@@ -20,7 +21,6 @@ class Public::OrdersController < ApplicationController
       @order.name = @address.name
     elsif params[:order][:select_address] == "2"
     else
-      redirect_to :back
     end
     # binding.pry #追記する
   end
@@ -30,7 +30,8 @@ class Public::OrdersController < ApplicationController
 
   def create
 　　@order = current_customer.orders.new(order_params)
-　　@order.save
+　　@order.save!
+　　redirect_to public_orders_complete_path
   end
 
   def index

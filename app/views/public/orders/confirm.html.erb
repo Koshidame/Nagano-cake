@@ -46,7 +46,7 @@
               <%= @total.round.to_s(:delimited) %>
             </td>
             <td>
-              <%= @total_with_tax.round.to_s(:delimited)%>
+              <%= @order.total_payment.round.to_s(:delimited)%>
             </td>
           </tr>
         </tbody>
@@ -57,8 +57,21 @@
       </div>
       <div class="form-group">
         <h5>お届け先</h5>
-        <%= @order.postal_code %> <%= @order.address %>
+        <%= @order.postal_code %> <%= @order.address %><br>
         <%= @order.name %>
+      </div>
+      <div class="form-group">
+        <%= form_with model: [:public, @order], local:true do |f| %>
+        <%= f.hidden_field :customer_id %>
+        <%= f.hidden_field :postal_code %>
+        <%= f.hidden_field :address %>
+        <%= f.hidden_field :name %>
+        <%= f.hidden_field :shipping_cost %>
+        <%= f.hidden_field :status, :value => "1" %>
+        <%= f.hidden_field :total_payment %>
+        <%= f.hidden_field :payment_method %>
+        <%= f.submit "注文を確定する", class: "btn btn-sm btn-primary" %>
+        <% end %>
       </div>
     </div>
   </div>
