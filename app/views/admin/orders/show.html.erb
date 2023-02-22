@@ -1,5 +1,5 @@
 
- 
+
  <div class="container">
 <h2 class="my-3 ml-3">注文履歴詳細</h2>
 <dl class="row">
@@ -15,6 +15,38 @@
    <dd class="col-10"><%= @orders.payment_method %></dd>
   <dt class="col-2">注文ステータス</dt>
    <dd class="col-10"><%= @orders.status %></dd>
-  
- </dl>
 
+ </dl>
+            <%= form_with model: @orders,url: admin_order_path(@orders.id), local: true do |f| %>
+            <%= f.select :status,Order.statuses_i18n.map {|k,v| [v, k]},required:true %>
+            <%= f.submit "更新", class: 'btn btn-success'%>
+            <% end %>
+
+
+  <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col" style="width: 20%">商品名</th>
+      <th scope="col" style="width: 10%">単価(税込み)</th>
+      <th scope="col" style="width: 10%">数量</th>
+      <th scope="col" style="width: 10%">小計</th>
+      <th scope="col" style="width: 20%">製作ステータス</th>
+      <th scope="col" style="width: 10%"></th>
+    </tr>
+  </thead>
+  <% @orders.order_details.each do |c| %>
+  <tbody>
+    <tr>
+      <td><%= c.item.name %></td>
+      <td><%= c.item.price*1.1.round %></td>
+      <td><%= c.amount %></td>
+      <td><%= c.item.price*1.1.round*c.amount %>円</td>
+      <td><%= c.making_status %></td>
+      <td> <%#= form_with model: c,url: admin_order_detail_path(c.id), local: true do |f| %>
+            <%#= f.select :making_status,OrderDetail.making_statuses_i18n.map {|k,v| [v, k]},required:true %>
+            <%# end %></td>
+       <!--<td><%#= f.submit "更新", class: 'btn btn-success'%></td>-->
+    </tr>
+  </tbody>
+  <% end %>
+</table>
