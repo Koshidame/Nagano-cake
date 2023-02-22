@@ -22,16 +22,17 @@ class Public::OrdersController < ApplicationController
     elsif params[:order][:select_address] == "2"
     else
     end
-    # binding.pry #追記する
+    binding.pry #追記する
   end
 
   def complete
   end
 
   def create
-　　@order = current_customer.orders.new(order_params)
-　　@order.save!
-　　redirect_to public_orders_complete_path
+    @order = current_customer.orders.new(order_params)
+    if @order.save!
+      redirect_to public_orders_complete_path
+    end
   end
 
   def index
@@ -42,6 +43,6 @@ class Public::OrdersController < ApplicationController
 
   private
     def order_params
-       params.require(:order).permit(:customer_id, :postal_code,:ddressa,:shipping_cost,:status,:total_payment,:payment_method)
+       params.require(:order).permit(:customer_id, :postal_code,:address,:shipping_cost,:status,:total_payment,:payment_method,:name)
     end
 end
