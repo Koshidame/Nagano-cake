@@ -1,25 +1,31 @@
-<table class='table table-hover table-inverse'>
-  <h1>注文一覧（TOPページ）</h1>
+<div class="container">
+<h1 class="my-3 ml-3">注文履歴</h1>
+<div class="row">
+<div class="col-12">
+<table class="table table-bordered">
   <thead>
     <tr>
-      <th>購入日時</th>
-      <th>購入者</th>
-      <th>注文個数</th>
-      <th>注文ステータス</th>
+      <th scope="col" style="width: 30%">購入日時</th>
+      <th scope="col" style="width: 20%">氏名</th>
+      <th scope="col" style="width: 20%">注文個数</th>
+      <th scope="col" style="width: 30%">注文ステータス</th>
     </tr>
   </thead>
+  <% @orders.each do |order| %>
   <tbody>
-    <% @orders.each do |order| %>
-      <tr>
-        <td><%= link_to admin_order_detail do %>
-          <%= order.created_at %>
-          <% end %>
-        </td>
-        <td>#{"order.last_name""order.first_name"}</td>
-        <td><%= order.amount %></td>
-        <td><%= order.making_status %></td>
-      </tr>
-    <% end %>
+    <tr>
+      <td><%= link_to admin_order_path(order.id) do %>
+        <%= order.created_at %><% end %></td>
+      <td>#{"order.last_name""order.first_name"}</td>
+      <td><%= order.amount %></td>
+      <td><%= order.making_status %></td>
+         
+    
+    </tr>
   </tbody>
+  <% end %>
 </table>
-<!--10件ずつ表示を分ける必要あり-->
+<div class="row justify-content-center"><%= paginate @orders %></div>
+</div>
+</div>
+</div>
