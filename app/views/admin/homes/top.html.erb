@@ -15,12 +15,17 @@
   <tbody>
     <tr>
       <td><%= link_to admin_order_path(order.id) do %>
-        <%= order.created_at %><% end %></td>
-      <td>#{"order.last_name""order.first_name"}</td>
-      <td><%= order.amount %></td>
-      <td><%= order.making_status %></td>
-         
-    
+        <%= order.created_at %>
+        <% end %></td>
+      <td><%= order.customer.first_name %></td>
+      <% order.order_details.each do |order_detail| %>
+       <% @total += order_detail.amount %>
+      <% end %>
+
+      <td><%= @total %></td>
+      <td><%= order.status_i18n %></td>
+
+
     </tr>
   </tbody>
   <% end %>
