@@ -22,7 +22,6 @@ class Public::OrdersController < ApplicationController
     elsif params[:order][:select_address] == "2"
     else
     end
-    binding.pry #追記する
   end
 
   def complete
