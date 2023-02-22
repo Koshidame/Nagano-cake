@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :genre
+  belongs_to :order
   has_many :order_details, dependent: :destroy
   has_one_attached :image
   
