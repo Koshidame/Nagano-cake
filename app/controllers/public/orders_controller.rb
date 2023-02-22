@@ -46,13 +46,12 @@ class Public::OrdersController < ApplicationController
 
   def index
     @orders = Order.all
-    @cart_items = current_customer.cart_items
+    @cart_items = current_customer.cart_items.all
   end
 
   def show
     @order = Order.find(params[:id])
-    @cart_items = current_customer.cart_items
-    @total = @cart_items.inject(0) { |sum, item| sum + item.sub_total }
+    @total = (@order.total_payment - @order.shipping_cost).round.to_s(:delimited)
   end
 
   private
