@@ -1,9 +1,11 @@
 class Public::CartItemsController < ApplicationController
+  before_action :authenticate_customer!
+
   def index
     @cart_items = current_customer.cart_items.all
     @cart_item = current_customer.cart_items.new
     @total = @cart_items.inject(0) { |sum, item| sum + item.sub_total }
-    
+
   end
 
   def update
@@ -42,7 +44,7 @@ class Public::CartItemsController < ApplicationController
       redirect_to item_path(@item.id), flash: {alert: '※個数を選択して下さい'}
     end
   end
-  
+
   private
     def cart_item_params
       params.require(:cart_item).permit(:amount, :item_id,:image)
