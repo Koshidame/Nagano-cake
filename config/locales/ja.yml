@@ -10,3 +10,9 @@
           production: "製作中"
           shipping: "発送準備"
           shipped: "発送済み"
+      order_detail:
+        making_status:
+          not_making: "製作不可"
+          wating_production: "製作待ち"
+          production: "製作中"
+          don: "製作完了"
