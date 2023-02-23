@@ -1,10 +1,10 @@
 <div class='container'>
-  <h3>注文情報入力</h3>
+  <h2>注文情報入力</h2>
   <div class='row mx-auto'>
     <%= form_with model: @order, url: public_orders_confirm_path, local:true do |f| %>
       <h5>支払方法</h5>
       <div class="form-group ms-5">
-      <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+      <%= f.radio_button :payment_method, Order.payment_methods.key(0), {:checked => true} %>
       <%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card] %>
       <br>
       <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
@@ -12,7 +12,7 @@
     </div>
     <h5>お届け先</h5>
     <div class="form-group ms-5">
-      <%= f.radio_button :select_address, 0 %>
+      <%= f.radio_button :select_address, 0, {:checked => true} %>
       <%= f.label :select_address, "ご自身の住所" %><br>
       <%= f.label :address_current_customer, current_customer.address, class: 'ms-4 col9' %>
       <br>
