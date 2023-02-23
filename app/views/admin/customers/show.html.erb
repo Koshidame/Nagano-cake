@@ -23,5 +23,8 @@
       <% end %>
  </dl>
  <div class="row">
-  <%= link_to "編集する", edit_admin_customer_path(@customers),class: 'btn btn-success' %>
+  <div class="col-2"></div>
+  <div class="col-2"><%= link_to "編集する", edit_admin_customer_path(@customers),class: 'btn btn-success' %></div>
+  <div class="col-4"><%= link_to "注文履歴一覧をみる", admin_path,class: 'btn btn-success' %></div>
  </div>
+ 
