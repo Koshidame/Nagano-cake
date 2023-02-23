@@ -1,21 +1,8 @@
 <div class="container">
   <div class="row ">
-    <div class="col-2 mt-5">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th class="text-center">ジャンル検索</th>
-          </tr>
-        </thead>
-        <% @genres.each do |genre| %>
-        <tbody>
-          <tr>
-            <td><%= genre.name %></td>
-          </tr>
-        </tbody>
-        <% end %>
-      </table>
-    </div>
+    
+    <%= render 'layouts/genre', genres: @genres %>
+    
     <div class ="col-9 mt-5">
       <table class="table">
         <tbody>
@@ -28,15 +15,13 @@
                 <h1><%=  @item.name %></h1>
                 <p><%= @item.introduction %></p>
                 <p><font size="6">¥<%= (@item.price*1.1).round.to_s(:delimited) %></font>(税込)</p>
-                <% if customer_signed_in? %>
-                  <%= form_with model: @cart_item,url: public_cart_items_path, local: true do |f| %>
-                  <%= f.hidden_field :item_id, value: @item.id %>
-                  <%= f.hidden_field :customer_id, :value => current_customer.id %>
-                  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <%= f.select :amount, *[1..10],{include_blank: '個数選択'},required:true, class: 'btn btn-outline-secondary' %>
-                  <%= f.submit "カートに入れる", class: 'btn btn-success'%>
-                  </div>
-                  <% end %>
+                <%= form_with model: @cart_item,url: public_cart_items_path, local: true do |f| %>
+                <%= f.hidden_field :item_id, value: @item.id %>
+                <%= f.hidden_field :customer_id, :value => current_customer.id %>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <%= f.select :amount, *[1..10],{include_blank: '個数選択'},required:true, class: 'btn btn-outline-secondary' %>
+                <%= f.submit "カートに入れる", class: 'btn btn-success'%>
+                </div>
                 <% end %>
               </div>
             </td>

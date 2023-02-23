@@ -1,0 +1,17 @@
+
+<div class="col-2 mt-5">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th class="text-center">ジャンル検索</th>
+      </tr>
+    </thead>
+    <% genres.each do |genre| %>
+    <tbody>
+      <tr>
+        <td><%= genre.name %></td>
+      </tr>
+    </tbody>
+    <% end %>
+  </table>
+</div>
