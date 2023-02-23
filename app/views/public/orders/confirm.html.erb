@@ -1,9 +1,9 @@
 <div class='container'>
+  <h2>注文情報確認</h2>
   <div class='row'>
-    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-      <h2>注文情報確認</h2>
-      <table class="table cart-table">
-        <thead>
+    <dt class="col-9">
+      <table class="table cart-table table-bordered">
+        <thead class="table-light">
           <tr>
             <th class="active col-xs-4">商品名</th>
             <th class="active col-xs-2">単価（税込）</th>
@@ -29,38 +29,40 @@
         <% end %>
         </tbody>
       </table>
-      <table class="table cart-table">
-        <thead>
+    </dt>
+    <dd class="col-3">
+      <table class="table cart-table table-bordered">
+        <!--<thead class="table-light col-3">-->
           <tr>
-            <th class="active col-xs-4">送料</th>
-            <th class="active col-xs-2">商品合計</th>
-            <th class="active col-xs-2">請求金額</th>
+            <th class="table-light">送料</th>
+            <td><%= @order.shipping_cost %></td>
           </tr>
-        </thead>
-        <tbody>
           <tr>
-            <td>
-              <%= @order.shipping_cost %>
-            </td>
-            <td>
-              <%= @total.round.to_s(:delimited) %>
-            </td>
-            <td>
-              <%= @order.total_payment.round.to_s(:delimited)%>
-            </td>
+            <th class="table-light">商品合計</th>
+            <td><%= @total.round.to_s(:delimited) %></td>
           </tr>
-        </tbody>
+          <tr>
+            <th class="table-light">請求金額</th>
+            <td><%= @order.total_payment.round.to_s(:delimited) %></td>
+          </tr>
+        <!--</thead>-->
+        <!--<tbody class="col-2">-->
+        <!--</tbody>-->
       </table>
-      <div class="form-group">
-        <h5>支払い方法</h5>
-        <%= @order.payment_method_i18n %>
+    </dd>
+
+      <div class="form-group row">
+        <dt class="col-2"><h5>支払い方法</h5></dt>
+        <dd class="col-10"><%= @order.payment_method_i18n %></dd>
       </div>
-      <div class="form-group">
-        <h5>お届け先</h5>
-        <%= @order.postal_code %> <%= @order.address %><br>
-        <%= @order.name %>
+      <div class="form-group row">
+        <dt class="col-2"><h5>お届け先</h5></dt>
+        <dd class="col-10">
+          <%= @order.postal_code %> <%= @order.address %><br>
+          <%= @order.name %>
+        </dd>
       </div>
-      <div class="form-group">
+      <div class="form-group d-flex justify-content-center">
         <%= form_with model: [:public, @order], local:true do |f| %>
         <%= f.hidden_field :customer_id %>
         <%= f.hidden_field :postal_code %>
@@ -70,9 +72,8 @@
         <%= f.hidden_field :status, :value => Order.statuses.key(1) %>
         <%= f.hidden_field :total_payment %>
         <%= f.hidden_field :payment_method %>
-        <%= f.submit "注文を確定する", class: "btn btn-sm btn-primary" %>
+        <%= f.submit "注文を確定する", class: "btn btn-sm btn-success" %>
         <% end %>
       </div>
-    </div>
   </div>
 </div>
