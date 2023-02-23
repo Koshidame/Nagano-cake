@@ -3,6 +3,7 @@ class Admin::OrdersController < ApplicationController
   def show
     @orders =Order.find(params[:id])
     @order_details = OrderDetail.where(order_id: params[:id])
+    @total = (@orders.total_payment - @orders.shipping_cost).round.to_s(:delimited)
   end
 
   def update
