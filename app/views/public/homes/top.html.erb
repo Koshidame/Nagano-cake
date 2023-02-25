@@ -22,7 +22,7 @@
         <div class="row">
           <% @items.reverse_each do |c| %>
           <div class="col-3">
-            <div><%= image_tag c.image, size:"150x150" %></div>
+            <div><%= link_to public_item_path(c.id) do %><%= image_tag c.image, size:"150x150" %><% end %></div>
             <div>
               <%= link_to public_item_path(c.id) do %>
               <%= c.name %><% end %>
