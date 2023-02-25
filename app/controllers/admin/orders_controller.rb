@@ -10,7 +10,7 @@ class Admin::OrdersController < ApplicationController
   def update
     @orders = Order.find(params[:id])
     if@orders.update(order_params)
-      if @orders.status == "confirm_payment" #ここがおかしい
+      if @orders.status == "confirm_payment"
         @orders.order_details.each do |order_detail|
           order_detail.making_status = 1
           order_detail.save
