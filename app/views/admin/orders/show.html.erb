@@ -5,7 +5,7 @@
 <dl class="row">
   <dt class="col-2">購入者</dt>
    <dd class="col-10"><%= link_to admin_customer_path(@orders.customer.id) do %>
-        <%= @orders.customer.last_name %><%= @orders.customer.first_name %><% end %></dd>
+        <%= @orders.customer.first_name %><%= @orders.customer.last_name %><% end %></dd>
   <dt class="col-2">注文日</dt>
    <dd class="col-10"><%= @orders.created_at.strftime('%Y/%m/%d') %></dd>
   <dt class="col-2">配送先</dt>
