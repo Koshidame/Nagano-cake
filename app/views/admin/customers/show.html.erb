@@ -1,10 +1,10 @@
 <div class="container">
-<h2 class="my-3 ml-3"><%= @customers.first_name%><%= @customers.last_name %>さんの会員詳細</h2>
+<h2 class="my-3 ml-3"><%= @customers.last_name%><%= @customers.first_name %>さんの会員詳細</h2>
 <dl class="row">
   <dt class="col-2">会員ID</dt>
   <dd class="col-10"><%= @customers.id%></dd>
   <dt class="col-2">氏名</dt>
-   <dd class="col-10"><%= @customers.first_name%>&emsp;<%= @customers.last_name %></dd>
+   <dd class="col-10"><%= @customers.last_name%>&emsp;<%= @customers.first_name %></dd>
   <dt class="col-2">フリガナ</dt>
    <dd class="col-10"><%= @customers.last_name_kana %>&emsp;<%= @customers.first_name_kana %></dd>
   <dt class="col-2">郵便番号</dt>
