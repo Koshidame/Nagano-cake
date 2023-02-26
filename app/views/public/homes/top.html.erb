@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    
+    <%= render 'layouts/genre', genres: @genres %>
+    
+    <div class="col-8 mb-3 justify-content-center mx-auto d-block">
+      <div class="card" style="max-width: 650px;">
+        <img class="card-img" src="/assets/img_topic06_01.jpg" alt="">
+        <div class="card-img-overlay">
+          <p class="text-black text-center fw-bolder"> ようこそ、NaganoCakeへ！<br>
+            このサイトは、ケーキ販売のECサイトになります。<br>
+            会員でない方も商品の閲覧はできますが、<br>
+            購入には会員登録が必要になります。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2"></div>
+      <div class="col-9">
+        <h3>新着商品</h3>
+        <div class="row">
+          <% @items.reverse_each do |c| %>
+          <div class="col-3">
+
+            <div><%= link_to public_item_path(c.id) do %><%= image_tag c.image, size:"150x150" %><% end %></div>
+
+            <div>
+              <%= link_to public_item_path(c.id) do %>
+              <%= c.name %><% end %>
+            </div>
+            <div>￥<%= (c.price*1.1).floor.to_s(:delimited) %></div>
+          </div>
+          <% end %>
+          <div class="col-9"></div>
+          <div class="col-3 float-end mt-5"><%= link_to "全ての商品を見る>", public_items_path %></div>
+        </div>
+      </div>
+  </div>
+</div>

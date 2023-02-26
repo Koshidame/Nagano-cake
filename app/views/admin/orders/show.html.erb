@@ -1,0 +1,62 @@
+
+
+ <div class="container">
+<h2 class="my-3 ml-3">注文履歴詳細</h2>
+<dl class="row">
+  <dt class="col-2">購入者</dt>
+   <dd class="col-10"><%= link_to admin_customer_path(@orders.customer.id) do %>
+        <%= @orders.customer.last_name %><%= @orders.customer.first_name %><% end %></dd>
+  <dt class="col-2">注文日</dt>
+   <dd class="col-10"><%= @orders.created_at.strftime('%Y/%m/%d') %></dd>
+  <dt class="col-2">配送先</dt>
+   <dd class="col-10"><%= @orders.postal_code %><%= @orders.address %></dd>
+  <dt class="col-2"></dt>
+   <dd class="col-10"><%= @orders.name %></dd>
+   <dt class="col-2">支払い方法</dt>
+   <dd class="col-10"><%= @orders.payment_method_i18n %></dd>
+  <dt class="col-2">注文ステータス</dt>
+   <dd class="col-10"><%= form_with model: @orders,url: admin_order_path(@orders.id), local: true do |f| %>
+            <%= f.select :status,Order.statuses_i18n.map {|k,v| [v, k]},required:true %>
+            <%= f.submit "更新", class: 'btn btn-success'%>
+            <% end %>
+</dd>
+</dl>
+
+<div class="row">
+<div class="col-8">
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col" style="width: 20%">商品名</th>
+      <th scope="col" style="width: 20%">単価(税込み)</th>
+      <th scope="col" style="width: 10%">数量</th>
+      <th scope="col" style="width: 10%">小計</th>
+      <th scope="col" style="width: 30%">製作ステータス</th>
+    </tr>
+  </thead>
+  <% @orders.order_details.each do |c| %>
+  <tbody>
+    <tr>
+      <td><%= c.item.name %></td>
+      <td><%= c.item.price*1.1.round %></td>
+      <td><%= c.amount %></td>
+      <td><%= c.item.price*1.1.round*c.amount %>円</td>
+      <td> <%= form_with model: c,url: admin_order_detail_path(c.id), local: true do |f| %>
+            <%= f.select :making_status,OrderDetail.making_statuses_i18n.map {|k,v| [v, k]},required:true %>
+    　<%= f.submit "更新", class: 'btn btn-success'%><% end %></td>
+      </tr>
+  </tbody>
+  <% end %>
+</table>
+</div>
+  <dl class="col-4 align-self-end">
+    <div class="row ">
+       <dt class="col-6">商品合計</dt>
+       <dd class="col-6"><%= @total %>円</dd>
+       <dt class="col-6">送料</dt>
+       <dd class="col-6"><%= @orders.shipping_cost %>円</dd>
+       <dt class="col-6">請求金額合計</dt>
+       <dd class="col-6"><%= @orders.total_payment %>円</dd>
+    </div>
+  </dl>
+</div>

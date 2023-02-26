@@ -1,0 +1,43 @@
+<div class='container'>
+  <h2>注文情報入力</h2>
+  <div class='row mx-auto'>
+    <%= form_with model: @order, url: public_orders_confirm_path, local:true do |f| %>
+      <h5>支払方法</h5>
+      <div class="form-group ms-5">
+      <%= f.radio_button :payment_method, Order.payment_methods.key(0), {:checked => true} %>
+      <%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card] %>
+      <br>
+      <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+      <%= f.label :payment_method_transfer, Order.payment_methods_i18n[:transfer]%>
+    </div>
+    <h5>お届け先</h5>
+    <div class="form-group ms-5">
+      <%= f.radio_button :select_address, 0, {:checked => true} %>
+      <%= f.label :select_address, "ご自身の住所" %><br>
+      <%= f.label :address_current_customer, current_customer.address, class: 'ms-4 col9' %>
+      <br>
+      <%= f.radio_button :select_address, 1 %>
+      <%= f.label :select_address, "登録住所から選択" %><br>
+      <div class="form-group ms-4">
+      <%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display), class: 'form-control ms-4' %>
+      </div>
+      <br>
+      <%= f.radio_button :select_address, 2 %>新しいお届け先<br>
+      <div class="form-group row ms-4">
+        <dt class="col-2"><%= f.label :postal_code, "郵便番号（ハイフン無し）" %></dt>
+        <dd class="col-5"><%= f.text_field :postal_code, class: 'form-control col-sm-10', placeholder: "0000000" %></dd>
+      </div>
+      <div class="form-group row ms-4">
+        <dt class="col-2"><%= f.label :address, "住所" %></dt>
+        <dd class="col-7"><%= f.text_field :address, class: 'form-control', placeholder: "東京都渋谷区代々木神園町0-0" %></dd>
+      </div>
+      <div class="form-group row ms-4">
+        <dt class="col-2"><%= f.label :name, "宛名" %></dt>
+        <dd class="col-5"><%= f.text_field :name, class: 'form-control', placeholder: "令和道子" %></dd>
+      </div>
+    </div>
+    <div class="form-group d-flex justify-content-center">
+      <%= f.submit "確認画面へ進む", class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>

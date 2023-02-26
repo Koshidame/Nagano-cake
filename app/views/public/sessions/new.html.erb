@@ -1,0 +1,41 @@
+<div class='container'>
+  <div class='row'>
+    <div class="mx-auto col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0">
+      <h2>ログイン</h2>
+
+      <p>会員の方はこちらからログイン</p>
+
+      <%= form_with model: [:public,@customer], url: customer_session_path, id: 'customer', class: 'customer', local: true do |f| %>
+        <% if @customer.errors.any? %>
+          <%= @customer.errors.count %>件のエラーが発生しました
+        <% end %>
+        <%= flash[:error] %>
+      
+      <div class="field">
+        <%= f.label :email,'メールアドレス' %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+        <% if @customer.errors.include?(:email) %>
+          <p style="color: red;"><%= @customer.errors.full_messages_for(:email).first %>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password,'パスワード' %><br />
+        <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
+        <% if @customer.errors.include?(:password) %>
+          <p style="color: red;"><%= @customer.errors.full_messages_for(:password).first %>
+        <% end %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "ログイン", class: 'btn btn-primary' %>
+      </div>
+      
+      <% end %>
+
+      <p>会員登録がお済みでない方
+      <br><%= link_to "こちら", new_customer_registration_path %> からログインしてください。</p>
+    
+    </div>
+  </div>
+</div>

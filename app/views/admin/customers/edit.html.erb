@@ -1,0 +1,50 @@
+<div class="container">
+  <h1 class="my-3 ml-3"><%= @customers.first_name%><%= @customers.last_name %>さんの会員情報編集</h1>
+<div class="row">
+
+<div class="form-group">
+<%= form_with model: [:admin,@customers] do |f| %>
+  <div class="row">
+    <div class="col"><label for="Name">氏名</label></div>
+    <div class="col"><%= f.text_field :first_name, autofocus: true, id:"name", placeholder:"苗字", :class=>"form-control name" %></div>
+    <div class="col"><%= f.text_field :last_name, autofocus: true, id:"name", placeholder:"名前", :class=>"form-control name" %></div>
+  </div>
+  <div class="row">
+    <div class="col"><label for="フリガナ">フリガナ</label></div>
+    <div class="col"><%= f.text_field :first_name_kana, autofocus: true, id:"name", placeholder:"ミョウジ", :class=>"form-control" %></div>
+    <div class="col"><%= f.text_field :last_name_kana, autofocus: true, id:"name", placeholder:"ナマエ", :class=>"form-control" %></div>
+  </div>
+  <div class="row">
+    <div class="col"><label for="郵便番号">郵便番号</label></div>
+    <div class="col"><%= f.text_field :postal_code, autofocus: true, id:"name", placeholder:"0000000", :class=>"form-control" %></div>
+    <div class="col"></div>
+  </div>
+  <div class="row">
+    <div class="col-4"><label for="住所">住所</label></div>
+    <div class="col"><%= f.text_field :address, autofocus: true, id:"name", placeholder:"住所", :class=>"form-control" %></div>
+  </div>
+  <div class="row">
+    <div class="col"><label for="電話番号">電話番号</label></div>
+    <div class="col"><%= f.text_field :telephone_number, autofocus: true, id:"電話番号", placeholder:"00000000000", :class=>"form-control" %></div>
+    <div class="col"></div>
+  </div>
+  <div class="row">
+    <div class="col"><label for="メールアドレス">メールアドレス</label></div>
+    <div class="col"><%= f.text_field :email, autofocus: true, id:"メールアドレス", placeholder:"sample@example.com", :class=>"form-control" %></div>
+    <div class="col"></div>
+  </div>
+  <div class="row">
+    <div class="col"><label for="会員ステータス">会員ステータス</label></div>
+    <div class="col">
+                     <%= f.radio_button :is_deleted, :false %>
+                     <%= f.label :is_deleted, "有効", {value: :fales} %>
+                     <%= f.radio_button :is_deleted, :true %>
+                     <%= f.label :is_deleted, "退会", {value: :true} %></div>
+
+    <div class="col"></div>
+  </div>
+<%= f.submit "変更を保存" %>
+<% end %>
+</div>
+</div>
+</div>
